@@ -1,0 +1,103 @@
+/* 見出し */
+.heading{
+    width: calc( 100% - 40px );
+    background-color : #588158;
+	color : white;
+    font-size: 20px;
+    padding : 8px 20px;
+}
+
+.content-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+	margin-bottom:1000px;
+	@media screen and (max-width: 767px) {
+	    //    margin: 20px auto;
+	}
+}
+
+
+.content-inner {
+    display: block;
+    position: relative;
+    min-width: 200px;
+    max-width: 640px;
+    max-height: 480px;
+    height: 100%;
+    background-color: transparent;
+    box-shadow: 1px 1px 8px black;
+    transition: 0.3s;
+	@media screen and (max-width: 767px) {
+        max-width: 320px;
+        max-height: 240px;
+    }
+}
+
+/*----------------------------------------
+//  matter関係
+//----------------------------------------*/
+.canvas-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-image: url(./img/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    max-height: 480px;
+	@media screen and (max-width: 767px) {
+        max-width: 320px;
+        max-height: 240px;
+    }
+}
+.canvas {
+	@media screen and (max-width: 767px) {
+		width: 100%;
+		height: 240px;
+	}
+}
+
+/*  キャンバス内の情報表示 */
+.canvas-infoframe {
+    display: none;
+    position: absolute;
+    width: 100px;
+    height: 28px;
+    right: 50%;
+    bottom: 5%;
+	@media screen and (max-width: 767px) {
+        right: 37%;
+        bottom: 1%;
+    }
+}
+
+.canvas-info {
+    position: relative;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    text-align:center;
+}
+.canvas-info:after {
+    position: absolute;
+    content: " ";
+	@media screen and (max-width: 767px) {
+        left: 8px;
+        top: -10px;
+        border-left: 2px solid transparent;
+        border-bottom: 10px solid rgba(0, 0, 0, 0.5);
+        border-right: 8px solid transparent;
+    }
+}
+
+/*  ジャンプ用エリア */
+.cafe-page{
+	height: 1000px;
+	width: 100%;
+	background-color : rgb(60,0,0);
+	color : white;
+	font-size: 100px;
+}
