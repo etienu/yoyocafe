@@ -38,22 +38,22 @@
 //  matter関係
 //----------------------------------------*/
 .canvas-container {
-    width: 100%;
-    height: 100%;
+    width: 640px;
+    height: 480px;
     position: relative;
     background-image: url(./img/background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     max-height: 480px;
     @media screen and (max-width: 767px) {
-        max-width: 320px;
-        max-height: 240px;
+        width: 320px;
+        height: 240px;
     }
 }
 .canvas {
     @media screen and (max-width: 767px) {
-	width: 100%;
-	height: 240px;
+        width: 100%;
+        height: 240px;
     }
 }
 
