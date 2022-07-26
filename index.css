@@ -94,7 +94,7 @@
 .cafe-page{
     height: 1000px;
     width: 100%;
-    background-color : rgb(60,0,0);
-    color : white;
+    background-color : white;
+    color : black;
     font-size: 100px;
 }
