@@ -421,7 +421,7 @@ window.onload = function() {
             mev_info_hidden_yoyo = 1;    //    画像変更中
             c_yoyoimg1.bodies[0].render.opacity =0;
             c_yoyoimg2.bodies[0].render.opacity =1;
-			Body.setPosition(c_yoyoimg2.bodies[0], c_yoyoimg1.bodies[0].position )
+            Body.setPosition(c_yoyoimg2.bodies[0], c_yoyoimg1.bodies[0].position );	//差分画像の座標をキャラの位置に合わせる
         }
     }
 
@@ -441,8 +441,8 @@ window.onload = function() {
             //  画像を戻す
             if (mev_info_hidden_yoyo == 1) {
                 mev_info_hidden_yoyo = 0;
-	            c_yoyoimg1.bodies[0].render.opacity =1;
-	            c_yoyoimg2.bodies[0].render.opacity =0;
+                c_yoyoimg1.bodies[0].render.opacity =1;
+                c_yoyoimg2.bodies[0].render.opacity =0;
             }
         }
     }
