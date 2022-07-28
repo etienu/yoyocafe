@@ -8,11 +8,11 @@ window.onload = function() {
     var mev_hover_collision=  0;   //    マウスカーソルがホバーしているアイテムのcollision
     var mev_info_count     = -1;   //    セリフのカウンター
     var mev_info_hidden_yoyo  = 0; //    キャラクタの管理
-    var mev_info_hidden_yoyox = 0; //    キャラクタの座標管理
     var mev_link_scroll_wait  = 0; //    スムーススクロール時の待ち時間
     var mev_canvas_in     = false; //    canvas内にカーソルがあるか
     var collisions = [];
     var startPoint = { x: 0, y: 0 };
+
 
     //Matter.js モジュール 初期設定
     var Engine = Matter.Engine,    //    物理シュミレーションおよびレンダリングを管理するコントローラーとなるメソッド
@@ -81,68 +81,13 @@ window.onload = function() {
     Composite.add(engine.world, mouseConstraint);
     render.mouse = canvasMouse;
 
-    //    category
+    //  category
     //  0x0001 : 地面・壁・キャラクタ
     //  0x0002 : キャラクタ画像
     //  0x0010 : ドーナツ
     //  0x0020 : クッキー
     //  0x0030 : コーヒー
     //  0x0200 : ロゴ
-    //----------------------------------------
-    // キャラクタ
-    //----------------------------------------
-    // vp = vertex path
-    //  [画像用物体] 画像用の極小点
-    var vp_yoyoi = Vertices.fromPath('21 240 21 239 22 239');    //    キャラクタ
-    var vp_logo  = Vertices.fromPath('0 100 0 0 150 0 150 100'); //    ロゴ
-    //  [当たり判定用]複雑な形は三つに分割
-    var vp_yoyo1 = Vertices.fromPath('21 240 15 90 20 43 42 13 92 6 129 29 154 98 158 134 148 240');
-    var vp_yoyo2 = Vertices.fromPath('148 240 195 144 246 164 339 153 339 240');
-    var vp_yoyo3 = Vertices.fromPath('269 240 299 105 303 62 323 49 354 68 351 103 316 175 310 202 288 240');
-
-    //  [キャラクタ画像]
-    //    Matter.Composites.stack(xx, yy, columns, rows, columnGap, rowGap, callback)
-    var c_yoyoimg1 = Composites.stack(220, 352, 1, 1, 1, 1, function(x, y) {
-        return Bodies.fromVertices(x, y, [vp_yoyoi], {
-            isStatic: true,    //    動かなくする
-            collisionFilter: { category: 0x0002 },
-            //スプライトの設定
-            render: { sprite: { texture: imgpath + 'yoyo.png' } }
-        }, true);
-    });
-    //  [キャラクタ画像:口パク] 右に1000ずらしておく
-    var c_yoyoimg2 = Composites.stack(1220, 352, 1, 1, 1, 1, function(x, y) {
-        return Bodies.fromVertices(x, y, [vp_yoyoi], {
-            isStatic: true,
-            collisionFilter: { category: 0x0002 },
-            render: { sprite: { texture: imgpath + 'yoyo2.png' } }
-        }, true );
-    });
-
-    var cmp_yoyoimg1 = Composite.add( engine.world, c_yoyoimg1 );
-    var cmp_yoyoimg2 = Composite.add( engine.world, c_yoyoimg2 );
-
-    // 配列で追加する事によって一つの固まりになる
-    var fvx = 180;        // X位置
-    var fvy = 420 - 15;   // Y位置
-    var fv_y1 = Bodies.fromVertices(fvx       , fvy   , vp_yoyo1, { isStatic: true, collisionFilter: { category: 0x0001 }, render: { visible: false } });
-    var fv_y2 = Bodies.fromVertices(fvx+97    , fvy+67, vp_yoyo2, { isStatic: true, collisionFilter: { category: 0x0001 }, render: { visible: false } });
-    var fv_y3 = Bodies.fromVertices(fvx+97+125, fvy+ 6, vp_yoyo3, { isStatic: true, collisionFilter: { category: 0x0001 }, render: { visible: false } });
-    Composite.add( engine.world, [fv_y1, fv_y2, fv_y3] );
-
-    //----------------------------------------
-    //  ロゴ [yoyocafe 画像]
-    //----------------------------------------
-    //  カテゴリを設定
-    var c_logo_cat = 0x0200;
-    var c_logo = Composites.stack(450, 30, 1, 1, 1, 1, function(x, y) {
-        return Bodies.fromVertices(x, y, [vp_logo], {
-            isStatic: true,
-            collisionFilter: { category: c_logo_cat },
-            render: { sprite: { texture: imgpath + '/logo.png' } }
-        }, true);
-    });
-    Composite.add(engine.world, c_logo);
 
     //----------------------------------------
     //  マップ
@@ -166,9 +111,69 @@ window.onload = function() {
 
 
     //----------------------------------------
+    // キャラクタ
+    //----------------------------------------
+    // vp = vertex path
+    //  [当たり判定用]複雑な形は三つに分割
+    var vp_yoyo1 = Vertices.fromPath('21 240 15 90 20 43 42 13 92 6 129 29 154 98 158 134 148 240');
+    var vp_yoyo2 = Vertices.fromPath('148 240 195 144 246 164 339 153 339 240');
+    var vp_yoyo3 = Vertices.fromPath('269 240 299 105 303 62 323 49 354 68 351 103 316 175 310 202 288 240');
+    // 配列で追加する事によって一つの固まりになる
+    var fvx = 180;        // X位置
+    var fvy = 420 - 15;   // Y位置
+    var fv_y1 = Bodies.fromVertices(fvx       , fvy   , vp_yoyo1, { isStatic: true, collisionFilter: { category: 0x0001 }, render: { visible: false } });
+    var fv_y2 = Bodies.fromVertices(fvx+97    , fvy+67, vp_yoyo2, { isStatic: true, collisionFilter: { category: 0x0001 }, render: { visible: false } });
+    var fv_y3 = Bodies.fromVertices(fvx+97+125, fvy+ 6, vp_yoyo3, { isStatic: true, collisionFilter: { category: 0x0001 }, render: { visible: false } });
+    Composite.add( engine.world, [fv_y1, fv_y2, fv_y3] );
+
+
+    //  [画像用物体] 画像用の極小点
+    var vp_yoyoi = Vertices.fromPath('21 240 21 239 22 239');    //    キャラクタ
+
+    //  [キャラクタ画像]
+    //    Matter.Composites.stack(xx, yy, columns, rows, columnGap, rowGap, callback)
+    var c_yoyoimg1 = Composites.stack(220, 352, 1, 1, 1, 1, function(x, y) {
+        return Bodies.fromVertices(x, y, [vp_yoyoi], {
+            isStatic: true,    //    動かなくする
+            collisionFilter: { category: 0x0002 },
+            //スプライトの設定
+            render: { sprite: { texture: imgpath + 'yoyo.png' } }
+        }, true);
+    });
+    //  [キャラクタ画像:口パク] 非表示
+    var c_yoyoimg2 = Composites.stack(220, 352, 1, 1, 1, 1, function(x, y) {
+        return Bodies.fromVertices(x, y, [vp_yoyoi], {
+            isStatic: true,
+            collisionFilter: { category: 0x0002 },
+            render: { sprite: { texture: imgpath + 'yoyo2.png' }, opacity:0 }
+        }, true );
+    });
+
+    var cmp_yoyoimg1 = Composite.add( engine.world, c_yoyoimg1 );
+    var cmp_yoyoimg2 = Composite.add( engine.world, c_yoyoimg2 );
+
+
+    //----------------------------------------
+    //  ロゴ [yoyocafe 画像]
+    //----------------------------------------
+    var vp_logo  = Vertices.fromPath('0 100 0 0 150 0 150 100'); //    ロゴ
+    //  カテゴリを設定
+    var c_logo_cat = 0x0200;
+    var c_logo = Composites.stack(450, 30, 1, 1, 1, 1, function(x, y) {
+        return Bodies.fromVertices(x, y, [vp_logo], {
+            isStatic: true,
+            collisionFilter: { category: c_logo_cat },
+            render: { sprite: { texture: imgpath + '/logo.png' } }
+        }, true);
+    });
+    Composite.add(engine.world, c_logo);
+
+
+    //----------------------------------------
     //初期物体を追加
     //----------------------------------------
     for (var i = 0; i < 10; i++) { matter_addItem();  }
+
 
     //----------------------------------------
     //イベント
@@ -265,6 +270,7 @@ window.onload = function() {
         Render.endViewTransform(render);
     });
 
+
     //----------------------------------------
     //    開始処理
     //----------------------------------------
@@ -319,8 +325,8 @@ window.onload = function() {
                 //    window.location.href ="https://www.google.co.jp/search?q=cafe";    //    別のページへ移動
                 break;
         }
-
     }
+
     //  カーソルがキャンバス内にいる
     function mouseOver() {  mev_canvas_in = true;  }
     //  カーソルがキャンバス外に出ている
@@ -413,12 +419,12 @@ window.onload = function() {
         //  画像を入れ替え
         if (mev_info_hidden_yoyo == 0) {
             mev_info_hidden_yoyo = 1;    //    画像変更中
-            Composite.translate(c_yoyoimg1, { x: 1000, y: 0 }); // 消す
-            Composite.translate(c_yoyoimg2, { x:-1000, y: 0 }); // 表示
-            mev_info_hidden_yoyox = 1000;    //    移動量保存
+            c_yoyoimg1.bodies[0].render.opacity =0;
+            c_yoyoimg2.bodies[0].render.opacity =1;
+			Body.setPosition(c_yoyoimg2.bodies[0], c_yoyoimg1.bodies[0].position )
         }
-
     }
+
 
     //----------------------------------------
     //  infoの処理( ループ中で実行 )
@@ -435,9 +441,8 @@ window.onload = function() {
             //  画像を戻す
             if (mev_info_hidden_yoyo == 1) {
                 mev_info_hidden_yoyo = 0;
-                Composite.translate(c_yoyoimg1, { x: mev_info_hidden_yoyox *-1, y: 0 });
-                Composite.translate(c_yoyoimg2, { x: mev_info_hidden_yoyox * 1, y: 0 });
-                mev_info_hidden_yoyox = 0;
+	            c_yoyoimg1.bodies[0].render.opacity =1;
+	            c_yoyoimg2.bodies[0].render.opacity =0;
             }
         }
     }
