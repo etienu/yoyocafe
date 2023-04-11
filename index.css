@@ -1,10 +1,10 @@
 /* 見出し */
-.heading{
-    width: calc( 100% - 40px );
-    background-color : #588158;
-    color : white;
+.heading {
+    width: calc( 100% - 40px);
+    background-color: #588158;
+    color: white;
     font-size: 20px;
-    padding : 8px 20px;
+    padding: 8px 20px;
 }
 
 .content-area {
@@ -14,9 +14,8 @@
     position: relative;
     flex-direction: column;
     width: 100%;
-    margin-bottom:1000px;
+    margin-bottom: 1000px;
 }
-
 
 .content-inner {
     display: block;
@@ -24,40 +23,34 @@
     min-width: 200px;
     max-width: 640px;
     max-height: 480px;
+    width: 100%;
     height: 100%;
     background-color: transparent;
     box-shadow: 1px 1px 8px black;
     transition: 0.3s;
-    @media screen and (max-width: 767px) {
-        max-width: 320px;
-        max-height: 240px;
-    }
 }
-
 /*----------------------------------------
 //  matter関係
 //----------------------------------------*/
 .canvas-container {
-    width: 640px;
-    height: 480px;
+    width: 100%;
+    height: 100%;
     position: relative;
     background-image: url(./img/background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     max-height: 480px;
-    @media screen and (max-width: 767px) {
-        width: 320px;
-        height: 240px;
-    }
-}
-.canvas {
-    @media screen and (max-width: 767px) {
-        width: 100%;
-        height: 240px;
-    }
+    overflow: hidden;
 }
 
+.canvas {
+    width: 100%;
+    height: 100%;
+}
+
+
 /*  キャンバス内の情報表示 */
+
 .canvas-infoframe {
     display: none;
     position: absolute;
@@ -76,8 +69,9 @@
     color: white;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
-    text-align:center;
+    text-align: center;
 }
+
 .canvas-info:after {
     position: absolute;
     content: " ";
@@ -90,11 +84,13 @@
     }
 }
 
+
 /*  ジャンプ用エリア */
-.cafe-page{
+
+.cafe-page {
     height: 1000px;
     width: 100%;
-    background-color : white;
-    color : black;
+    background-color: white;
+    color: black;
     font-size: 100px;
 }
