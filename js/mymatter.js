@@ -19,7 +19,7 @@ window.onload = function() {
     //  縦横比率
     var aspect_ratio = render_height / render_width;
 
-    
+
     //Matter.js モジュール 初期設定
     var Engine = Matter.Engine,    //    物理シュミレーションおよびレンダリングを管理するコントローラーとなるメソッド
         Render = Matter.Render,    //    描画処理
@@ -50,9 +50,12 @@ window.onload = function() {
         render_height = cw * aspect_ratio;
     }
 
-    // Matter.js エンジン作成
+    //----------------------------------------
+    // エンジン作成
+    //----------------------------------------
     var engine = Engine.create();
-    // renderer 作成
+
+    // render 作成と実行
     var render = Render.create({
         element: container,
         canvas: canvas,
@@ -64,6 +67,12 @@ window.onload = function() {
             background: 'rgba(0,0,0,0)' //    背景を透明に
         }
     });
+    Render.run(render);
+
+    // runner 作成と実行
+    var runner = Runner.create();
+    Runner.run(runner, engine);
+
 
     //----------------------------------------
     // マウス作成
@@ -266,16 +275,6 @@ window.onload = function() {
 
         Render.endViewTransform(render);
     });
-
-    //----------------------------------------
-    //    開始処理
-    //----------------------------------------
-    // renderer実行
-    Render.run(render);
-    // runner実行
-    var runner = Runner.create();
-    Runner.run(runner, engine);
-//    Engine.run(engine);    //    Engineでも動く
 
 
 
