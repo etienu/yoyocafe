@@ -42,14 +42,6 @@ window.onload = function() {
     //    キャンバスの指定
     var canvas       = document.getElementById('js__canvas');
 
-    //  ウインドウの初期サイズを取得する
-    var cw = container.clientWidth;
-    //  基準サイズ以下なら幅と高さを設定し直す
-    if (cw < render_width) {
-        render_width = cw;
-        render_height = cw * aspect_ratio;
-    }
-
     //----------------------------------------
     // エンジン作成
     //----------------------------------------
@@ -61,8 +53,8 @@ window.onload = function() {
         canvas: canvas,
         engine: engine,
         options: {
-            width: render_width,
-            height: render_height,
+            width: render_width, // 画面サイズではなくmatter空間のサイズ
+            height: render_height,//このサイズに合わせて物体を配置します
             wireframes: false, //    true : 画像は消える。当たり判定の描画
             background: 'rgba(0,0,0,0)' //    背景を透明に
         }
@@ -73,6 +65,14 @@ window.onload = function() {
     var runner = Runner.create();
     Runner.run(runner, engine);
 
+
+    //  div枠のサイズを取得する
+    var cw = container.clientWidth;
+    //  matter空間サイズ以下なら基準描画幅と高さを設定し直す
+    if (cw < render_width) {
+        render_width = cw;
+        render_height = cw * aspect_ratio;
+    }
 
     //----------------------------------------
     // マウス作成
@@ -298,11 +298,11 @@ window.onload = function() {
         //    キャンバスのサイズを取得
         var cw = container.clientWidth;
         var mouse = mouseConstraint.mouse;
+
         //  画面倍率の計算(現在の幅 / 初期幅 )
         boundsScale.x = cw / render.options.width;
         boundsScale.y = boundsScale.x; //  xy倍率揃える
-        // マウスのスケール設定 
-        Mouse.setScale(mouse, boundsScale);
+
         //  canvasのstyleが強制されているので直す
         canvas.style.width = render.options.width * boundsScale.x; // 初期画面幅*スケールx
         canvas.style.height = render.options.height * boundsScale.y; // 初期画面高さ*スケールy
