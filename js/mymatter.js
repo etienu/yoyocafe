@@ -140,7 +140,7 @@ window.onload = function() {
             render: { sprite: { texture: imgpath + 'yoyo.png' } }
         }, true);
     });
-    //  [キャラクタ画像:口パク] 右に1000ずらしておく
+    //  [キャラクタ画像:口パク] 右に1000ずらして隠しておく
     var c_yoyoimg2 = Composites.stack(1220, 352, 1, 1, 1, 1, function(x, y) {
         return Bodies.fromVertices(x, y, [vp_yoyoi], {
             isStatic: true,
