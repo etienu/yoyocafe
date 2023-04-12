@@ -76,6 +76,7 @@ window.onload = function() {
 
     //----------------------------------------
     // マウス作成
+    //----------------------------------------
     var canvasMouse = Mouse.create(render.canvas);
     var mouseConstraint = MouseConstraint.create(engine, {
         mouse: canvasMouse,
@@ -92,6 +93,9 @@ window.onload = function() {
     Composite.add(engine.world, mouseConstraint);
     render.mouse = canvasMouse;
 
+    //----------------------------------------
+    //	物体の作成
+    //----------------------------------------
     //    category
     //  0x0001 : 地面・壁・キャラクタ
     //  0x0002 : キャラクタ画像
