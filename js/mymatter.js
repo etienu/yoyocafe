@@ -239,7 +239,7 @@ window.onload = function() {
         Render.startViewTransform( render );//    なくても動くが一応
         context.beginPath();                //    パス描画の初期化
         //  カーソル初期化
-        document.body.style.cursor = 'auto';
+	change_cursor( 'auto' );
         //    点判定なので基本1回
         for ( var i = 0; i < collisions.length; i++ ) {
             var collision = collisions[i];
@@ -336,7 +336,7 @@ window.onload = function() {
     function change_cursor(i_name) {
         if (!mev_canvas_in) return;            //    キャンバス外の場合処理無効
         if (0 < mev_link_scroll_wait) return;  //    スクロール中は無効
-        document.body.style.cursor = i_name;
+	container.style.cursor = i_name;
     }
 
 
@@ -401,7 +401,7 @@ window.onload = function() {
         const offset = window.pageYOffset;                //    ページのスクロールY位置を取得
         const position = rect + offset;        // 現在位置+距離 = 移動先のY位置
         //  カーソルを直す
-        document.body.style.cursor = 'auto';
+	change_cursor( 'auto' );
         //  カーソル変化処理待機
         mev_link_scroll_wait = 100;
         // スクロール処理
