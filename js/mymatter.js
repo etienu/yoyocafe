@@ -297,7 +297,6 @@ window.onload = function() {
     function resizeWindow(){
         //    キャンバスのサイズを取得
         var cw = container.clientWidth;
-        var mouse = mouseConstraint.mouse;
 
         //  画面倍率の計算(現在の幅 / 初期幅 )
         boundsScale.x = cw / render.options.width;
@@ -307,6 +306,7 @@ window.onload = function() {
         canvas.style.width = render.options.width * boundsScale.x; // 初期画面幅*スケールx
         canvas.style.height = render.options.height * boundsScale.y; // 初期画面高さ*スケールy
     }
+
 
     //----------------------------------------
     //    マウス関係
