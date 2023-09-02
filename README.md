@@ -8,13 +8,8 @@ matter.jsを使用したwebコンテンツのサンプル
 https://etienu.github.io/yoyocafe/<br>
 ※MIT License 参照し、matter.min.jsコピーしています<br>
 
-# 必要なもの
-* matter.js
- 
 # 実行方法
 zipをダウンロードして解凍
-
-//jsフォルダにmatter.min.jsを入れる
 
 index.htmlを開く
 
